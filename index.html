@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mercédesz 25 – Boldog szülinapot, Kisnyuszi!</title>
+  <meta name="description" content="Születésnapi weboldal Urbán Mercédesz Alexandra 25. születésnapjára – a kis piros Suzuki Alto büszke tulajdonosának.">
+  <meta name="theme-color" content="#0a0610">
+  <meta property="og:title" content="Boldog 25. szülinapot, Mercédesz!">
+  <meta property="og:description" content="Egy kis weboldal a legjobb nővérről.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%90%B0%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+  <!-- ============ Shared SVG: bunny line art ============ -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="bunny" viewBox="0 0 200 220" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M64 113C40 66 46 10 72 10C96 10 94 64 88 102"/>
+      <path d="M136 113C160 66 154 10 128 10C104 10 106 64 112 102"/>
+      <path d="M68 96C58 66 62 32 72 32C82 32 82 66 80 94" stroke="#ff5c9d"/>
+      <path d="M132 96C142 66 138 32 128 32C118 32 118 66 120 94" stroke="#ff5c9d"/>
+      <ellipse cx="100" cy="150" rx="56" ry="50"/>
+      <circle cx="80" cy="144" r="4.5" fill="currentColor" stroke="none"/>
+      <circle cx="120" cy="144" r="4.5" fill="currentColor" stroke="none"/>
+      <circle cx="68" cy="160" r="8" fill="#ff5c9d" fill-opacity=".45" stroke="none"/>
+      <circle cx="132" cy="160" r="8" fill="#ff5c9d" fill-opacity=".45" stroke="none"/>
+      <path d="M94 158Q100 152 106 158Q100 166 94 158Z" fill="#ff5c9d" stroke="#ff5c9d" stroke-width="2"/>
+      <path d="M100 165V172M100 172Q92 182 84 175M100 172Q108 182 116 175"/>
+      <path d="M68 158L34 152M68 167L34 172M132 158L166 152M132 167L166 172"/>
+    </symbol>
+  </svg>
+
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor" id="cursor" aria-hidden="true"><span></span></div>
+  <canvas id="confetti" aria-hidden="true"></canvas>
+
+  <!-- ============ Loader ============ -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader-num"><span id="loader-count">00</span></div>
+    <div class="loader-bar"><i id="loader-bar"></i></div>
+    <p class="loader-txt">🐰 valami készül…</p>
+  </div>
+
+  <!-- ============ Nav ============ -->
+  <nav class="nav" aria-label="Fő navigáció">
+    <a class="brand" href="#top">M<span>·</span>25 <i aria-hidden="true">🐰</i></a>
+    <div class="nav-links">
+      <a href="#ki-ez">Ki ő?</a>
+      <a href="#segitseg">Segítség</a>
+      <a href="#konyha">Konyha</a>
+      <a href="#alto">Kis piros</a>
+      <a href="#kepek">Képek</a>
+      <a href="#szulinap">Torta</a>
+    </div>
+  </nav>
+
+  <!-- ============ Hero ============ -->
+  <header class="hero" id="top">
+    <div class="aurora" aria-hidden="true"><i class="a1"></i><i class="a2"></i><i class="a3"></i></div>
+    <div class="hero-25" aria-hidden="true">25</div>
+
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="pulse" aria-hidden="true"></span><span id="eyebrow">25. születésnap</span></p>
+
+        <h1 class="title" aria-label="Boldog 25. szülinapot, Mercédesz!">
+          <span class="row" aria-hidden="true"><span class="split" data-split>BOLDOG</span> <span class="split outline" data-split>25.</span></span>
+          <span class="row" aria-hidden="true"><span class="split serif" data-split>szülinapot,</span></span>
+          <span class="row" aria-hidden="true"><span class="split grad" data-split>MERCÉDESZ!</span></span>
+        </h1>
+
+        <p class="lead">Egy kis weboldal a legjobb nővérről – aki mindig ott volt, ha segítség kellett, és aki a <strong>kis piros Suzuki Alto</strong> büszke tulajdonosa.</p>
+
+        <div class="countdown" id="countdown" role="timer" aria-label="Visszaszámlálás a születésnapig">
+          <div class="cd"><b id="cd-d">--</b><small>nap</small></div>
+          <div class="cd"><b id="cd-h">--</b><small>óra</small></div>
+          <div class="cd"><b id="cd-m">--</b><small>perc</small></div>
+          <div class="cd"><b id="cd-s">--</b><small>mp</small></div>
+        </div>
+        <p class="cd-done" id="cd-done" hidden></p>
+
+        <div class="hero-cta">
+          <button class="btn magnetic" id="party" type="button">🎉 Meglepetés, Kisnyuszi!</button>
+          <p class="wish" id="wish" aria-live="polite"></p>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="photo-card" id="photoCard">
+          <div class="arch"><img src="images/dressed-up.webp" width="1500" height="2000" alt="Mercédesz csillogó ruhában, mosolyogva, egy szürke függöny előtt"></div>
+
+          <svg class="badge" viewBox="0 0 200 200" aria-hidden="true">
+            <defs><path id="circ" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
+            <circle cx="100" cy="100" r="98" fill="#ffd25e"/>
+            <text class="badge-ring" font-size="15.5" font-weight="800" letter-spacing="2"><textPath href="#circ" textLength="480" lengthAdjust="spacing">KISNYUSZI ✦ 25 ÉVES ✦ KISNYUSZI ✦ 25 ÉVES ✦</textPath></text>
+            <text x="100" y="128" text-anchor="middle" font-size="76" font-weight="800" class="badge-num">25</text>
+          </svg>
+
+          <span class="sticker st1" aria-hidden="true">🐰</span>
+          <span class="sticker st2" aria-hidden="true">🎂</span>
+          <span class="sticker st3" aria-hidden="true">✨</span>
+          <span class="sticker st4" aria-hidden="true">🚗</span>
+        </div>
+      </div>
+    </div>
+
+    <a class="scroll-hint" href="#ki-ez" aria-label="Görgess lejjebb"><span>görgess</span><i></i></a>
+  </header>
+
+  <!-- ============ Marquee ============ -->
+  <div class="marquees" aria-hidden="true">
+    <div class="marquee m1"><div class="track">
+      <span>Kisnyuszi ✦ 25 éves ✦ Suzuki Alto ✦ Mercédesz ✦ Boldog szülinapot ✦ </span>
+      <span>Kisnyuszi ✦ 25 éves ✦ Suzuki Alto ✦ Mercédesz ✦ Boldog szülinapot ✦ </span>
+    </div></div>
+    <div class="marquee m2"><div class="track rev">
+      <span>2001. 09. 20. ✦ csütörtök ✦ 🐰 ✦ Urbán Mercédesz Alexandra ✦ 🚗 ✦ </span>
+      <span>2001. 09. 20. ✦ csütörtök ✦ 🐰 ✦ Urbán Mercédesz Alexandra ✦ 🚗 ✦ </span>
+    </div></div>
+  </div>
+
+  <main>
+
+    <!-- ============ 01 – Ki ő? ============ -->
+    <section class="section" id="ki-ez">
+      <div class="sec-head">
+        <span class="kicker">01 — Ki ő?</span>
+        <h2 class="h2" data-split>Ismerd meg a <em>legjobb</em> nővért</h2>
+      </div>
+
+      <div class="bento">
+        <article class="tile t-name">
+          <small>Teljes név</small>
+          <h3><span>Urbán</span><span>Mercédesz</span><span>Alexandra</span></h3>
+        </article>
+
+        <article class="tile t-date" aria-label="Született 2001. szeptember 20-án, csütörtökön">
+          <small>Született</small>
+          <div class="cal">
+            <span class="cal-y">2001</span>
+            <span class="cal-m">szeptember</span>
+            <b class="cal-d">20</b>
+            <span class="cal-w">csütörtök</span>
+          </div>
+        </article>
+
+        <article class="tile t-age">
+          <small>Kor</small>
+          <div class="age"><b id="age-num">25</b><span>év</span></div>
+          <p id="age-note">holnaptól!</p>
+        </article>
+
+        <article class="tile t-nick">
+          <small>Becenév</small>
+          <svg class="bunny-ico" viewBox="0 0 200 220" aria-hidden="true"><use href="#bunny"/></svg>
+          <h3>Kisnyuszi</h3>
+        </article>
+
+        <article class="tile t-num">
+          <small>25 év számokban</small>
+          <ul>
+            <li><b>9 131</b> nap</li>
+            <li><b>300</b> hónap</li>
+            <li><b>219 144</b> óra</li>
+            <li><b>1</b> kis piros Suzuki Alto</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ 02 – Segítség ============ -->
+    <section class="section help" id="segitseg">
+      <div class="help-grid">
+        <div class="help-copy">
+          <span class="kicker">02 — Az örök segítő</span>
+          <p class="scrub" id="scrub">Ha fogalmazást kellett írnom, <em>ő</em> segített. Ha rajzolni kellett, <em>ő</em> segített. Mindig ő segített nekem.</p>
+
+          <div class="chips">
+            <div class="chip"><span aria-hidden="true">✍️</span> Fogalmazások</div>
+            <div class="chip"><span aria-hidden="true">🎨</span> Rajzok</div>
+            <div class="chip"><span aria-hidden="true">🐰</span> Mindig</div>
+          </div>
+        </div>
+
+        <div class="help-art" aria-hidden="true">
+          <svg class="doodle" viewBox="0 0 200 220" fill="none" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+            <path pathLength="1" d="M64 113C40 66 46 10 72 10C96 10 94 64 88 102"/>
+            <path pathLength="1" d="M136 113C160 66 154 10 128 10C104 10 106 64 112 102"/>
+            <path pathLength="1" class="pk" d="M68 96C58 66 62 32 72 32C82 32 82 66 80 94"/>
+            <path pathLength="1" class="pk" d="M132 96C142 66 138 32 128 32C118 32 118 66 120 94"/>
+            <ellipse pathLength="1" cx="100" cy="150" rx="56" ry="50"/>
+            <path pathLength="1" d="M100 165V172M100 172Q92 182 84 175M100 172Q108 182 116 175"/>
+            <path pathLength="1" d="M68 158L34 152M68 167L34 172M132 158L166 152M132 167L166 172"/>
+            <circle class="eye" cx="80" cy="144" r="4.5"/>
+            <circle class="eye" cx="120" cy="144" r="4.5"/>
+            <path class="nose" d="M94 158Q100 152 106 158Q100 166 94 158Z"/>
+          </svg>
+          <span class="pencil">✏️</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 03 – Konyha ============ -->
+    <section class="section" id="konyha">
+      <div class="sec-head">
+        <span class="kicker">03 — Konyhai kisokos</span>
+        <h2 class="h2" data-split>Anyu &amp; Mercédesz a <em>konyhában</em></h2>
+      </div>
+
+      <div class="kitchen">
+        <div class="receipt">
+          <div class="stamp" aria-hidden="true">SOHA</div>
+          <p class="r-head">KONYHAI NAPLÓ · #0001</p>
+          <h3>Közös főzés</h3>
+          <ul class="r-list">
+            <li><span>1 × Mercédesz</span><i></i><b>✓</b></li>
+            <li><span>1 × anyu</span><i></i><b>✓</b></li>
+            <li><span>1 × konyha</span><i></i><b>✓</b></li>
+            <li><span>∞ × türelem</span><i></i><b class="bad">✗</b></li>
+          </ul>
+          <div class="r-total"><span>ADAG</span><b>0</b></div>
+          <p class="r-foot">Mercédesz sosem tud az anyjával együtt főzni. Sosem.</p>
+        </div>
+
+        <div class="terminal" id="terminal" aria-label="Terminál-szimuláció a közös főzésről">
+          <div class="t-bar"><i></i><i></i><i></i><span>konyha.exe</span></div>
+          <div class="t-body">
+            <div class="tl">$ fozes --egyutt anyu mercedesz</div>
+            <div class="tl dim">› konyha betöltése… kész</div>
+            <div class="tl dim">› hozzávalók ellenőrzése… kész</div>
+            <div class="tl dim">› közös főzés indítása…</div>
+            <div class="tl err">✖ HIBA: közös főzés nem sikerült</div>
+            <div class="tl err">✖ (soha nem sikerül)</div>
+            <div class="tl">$ <b class="caret"></b></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 04 – A kis piros ============ -->
+    <section class="alto" id="alto">
+      <div class="alto-stage">
+        <div class="alto-bgtext" aria-hidden="true">ALTO</div>
+
+        <div class="alto-copy">
+          <span class="kicker">04 — A kis piros</span>
+          <h2 class="h2">Suzuki <em>Alto</em></h2>
+          <p>Mercédesz a kis piros Suzuki Alto tulajdonosa. Kicsi, piros, és bárhová eljut vele – pont ilyennek kell lennie egy igazi városi hősnek.</p>
+          <p class="small">Egy kicsit most lapos, de attól még a mi kis pirosunk. 🛞</p>
+        </div>
+
+        <div class="alto-photo">
+          <img src="images/alto.webp" width="1128" height="2000" loading="lazy" alt="Piros Suzuki Alto parkolóban, az első kereke kissé leeresztve">
+        </div>
+
+        <div class="road" aria-hidden="true"></div>
+        <svg class="alto-car" viewBox="0 0 260 112" aria-hidden="true">
+          <ellipse cx="130" cy="106" rx="112" ry="5" fill="rgba(0,0,0,.4)"/>
+          <path d="M14 84V68Q14 60 24 57L58 50L82 24Q86 19 93 19H166Q174 19 179 25L200 52L236 58Q248 60 248 70V84Q248 90 242 90H20Q14 90 14 84Z" fill="#e0182d"/>
+          <path d="M89 29L71 50H120V29Z" fill="#bfe6ff"/>
+          <path d="M128 29V50H192L174 29Z" fill="#bfe6ff"/>
+          <path d="M28 62H228" stroke="rgba(255,255,255,.38)" stroke-width="3" stroke-linecap="round"/>
+          <path d="M124 50V88" stroke="rgba(0,0,0,.28)" stroke-width="2"/>
+          <rect x="235" y="64" width="11" height="8" rx="3" fill="#ffe08a"/>
+          <rect x="14" y="68" width="8" height="8" rx="3" fill="#ff9a9a"/>
+          <path d="M39 90A23 23 0 0 1 85 90Z" fill="#12081a"/>
+          <path d="M173 90A23 23 0 0 1 219 90Z" fill="#12081a"/>
+          <g class="wheel"><circle cx="62" cy="90" r="19" fill="#151018"/><circle cx="62" cy="90" r="10" fill="#c9c9d6"/><path d="M62 82V98M54 90H70" stroke="#6b6b7d" stroke-width="3"/></g>
+          <g class="wheel"><circle cx="196" cy="90" r="19" fill="#151018"/><circle cx="196" cy="90" r="10" fill="#c9c9d6"/><path d="M196 82V98M188 90H204" stroke="#6b6b7d" stroke-width="3"/></g>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ============ 05 – Képek ============ -->
+    <section class="section" id="kepek">
+      <div class="sec-head">
+        <span class="kicker">05 — Pillanatképek</span>
+        <h2 class="h2" data-split>Pillanat<em>képek</em></h2>
+      </div>
+
+      <div class="stack">
+        <article class="scard c1" style="--i:0">
+          <div class="scard-img"><img src="images/wellness.webp" width="1500" height="2000" loading="lazy" alt="Mercédesz csíkos felsőben egy vízi masszázságyon fekszik" style="object-position:50% 72%"></div>
+          <div class="scard-txt"><span class="num">01</span><h3>Wellness-nap</h3><p>Amikor a kisnyuszi feltöltődik. Neki ez is jár, sőt, még több.</p></div>
+        </article>
+        <article class="scard c2" style="--i:1">
+          <div class="scard-img"><img src="images/kamera.webp" width="1128" height="2000" loading="lazy" alt="Életlen kameraképernyő, rajta két vidáman grimaszoló ember" style="object-position:50% 34%"></div>
+          <div class="scard-txt"><span class="num">02</span><h3>Életlen, de vidám</h3><p>Nem a legélesebb kép a világon, de a hangulat tökéletes.</p></div>
+        </article>
+        <article class="scard c3" style="--i:2">
+          <div class="scard-img"><img src="images/dressed-up.webp" width="1500" height="2000" loading="lazy" alt="Mercédesz csillogó ruhában és magas sarkú csizmában, mosolyogva" style="object-position:50% 22%"></div>
+          <div class="scard-txt"><span class="num">03</span><h3>Díszben</h3><p>Csillogó ruha, gyönyörű mosoly – így néz ki, ha Mercédesz kiöltözik.</p></div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ Finálé ============ -->
+  <footer class="finale" id="szulinap">
+    <div class="fin-marquee" aria-hidden="true"><div class="track">
+      <span>Boldog szülinapot ✦ Kisnyuszi ✦ 25 ✦ </span>
+      <span>Boldog szülinapot ✦ Kisnyuszi ✦ 25 ✦ </span>
+    </div></div>
+
+    <div class="fin-inner">
+      <span class="kicker">06 — Kívánj valamit</span>
+
+      <div class="cake-wrap" id="cakeWrap">
+        <svg class="cake" viewBox="0 0 320 300" aria-hidden="true">
+          <ellipse cx="160" cy="280" rx="146" ry="15" fill="#1a1024"/>
+          <rect x="34" y="176" width="252" height="98" rx="24" fill="#ff5c9d"/>
+          <rect x="82" y="118" width="156" height="66" rx="20" fill="#ffd9e8"/>
+          <path d="M82 138Q82 118 102 118H218Q238 118 238 138V144Q230 160 220 144Q210 162 198 144Q186 164 174 144Q162 160 150 144Q138 164 126 144Q114 160 104 144Q92 158 82 144Z" fill="#fff4ee"/>
+          <path d="M34 196Q34 176 56 176H264Q286 176 286 196V202Q276 220 264 202Q254 222 242 202Q230 224 216 202Q204 220 192 202Q180 226 166 202Q154 220 142 202Q130 224 118 202Q106 220 94 202Q82 222 70 202Q56 220 46 202Q38 212 34 202Z" fill="#fff4ee"/>
+          <text x="160" y="254" text-anchor="middle" font-size="54" font-weight="800" fill="#0a0610" class="cake-num">25</text>
+          <g class="candles">
+            <g transform="translate(112 0)"><rect x="-4" y="88" width="8" height="30" rx="3" fill="#ffd25e"/><path class="flame" d="M0 86C-7 76-5 66 0 58C5 66 7 76 0 86Z" fill="#ff9a3c"/></g>
+            <g transform="translate(136 0)"><rect x="-4" y="84" width="8" height="34" rx="3" fill="#b9a4ff"/><path class="flame f2" d="M0 82C-7 72-5 62 0 54C5 62 7 72 0 82Z" fill="#ff9a3c"/></g>
+            <g transform="translate(160 0)"><rect x="-4" y="80" width="8" height="38" rx="3" fill="#6ee7c8"/><path class="flame f3" d="M0 78C-7 68-5 58 0 50C5 58 7 68 0 78Z" fill="#ff9a3c"/></g>
+            <g transform="translate(184 0)"><rect x="-4" y="84" width="8" height="34" rx="3" fill="#b9a4ff"/><path class="flame f2" d="M0 82C-7 72-5 62 0 54C5 62 7 72 0 82Z" fill="#ff9a3c"/></g>
+            <g transform="translate(208 0)"><rect x="-4" y="88" width="8" height="30" rx="3" fill="#ffd25e"/><path class="flame" d="M0 86C-7 76-5 66 0 58C5 66 7 76 0 86Z" fill="#ff9a3c"/></g>
+          </g>
+          <g class="smoke"><circle cx="112" cy="70" r="5"/><circle cx="136" cy="64" r="5"/><circle cx="160" cy="58" r="6"/><circle cx="184" cy="64" r="5"/><circle cx="208" cy="70" r="5"/></g>
+        </svg>
+        <button class="btn magnetic" id="blow" type="button">🕯️ Fújd el a gyertyákat!</button>
+        <p class="wish" id="cake-msg" aria-live="polite"></p>
+      </div>
+
+      <h2 class="fin-title">Boldog 25. szülinapot,<br><em>Kisnyuszi</em>!</h2>
+      <p class="fin-text">Köszönöm a fogalmazásokat, a rajzokat és a rengeteg segítséget. Ünnepeld meg nagyon!</p>
+      <p class="sign">– a testvéred 🐰</p>
+    </div>
+
+    <p class="copyright">Urbán Mercédesz Alexandra · 2001. 09. 20. – ∞</p>
+  </footer>
+
+  <script src="vendor/gsap.min.js"></script>
+  <script src="vendor/ScrollTrigger.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
